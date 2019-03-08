@@ -7,6 +7,9 @@ import { TimeSliderComponent } from './time-slider/time-slider.component';
 import { GaugeChartComponent } from './gauge-chart/gauge-chart.component';
 import { ThermometerChartComponent } from './thermometer-chart/thermometer-chart.component';
 import { HeightChartComponent } from './height-chart/height-chart.component';
+import { CsvReaderService } from './services/csv-reader.service';
+import { HttpClientModule } from '@angular/common/http';
+import { JsonReaderService } from './services/json-reader.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,10 @@ import { HeightChartComponent } from './height-chart/height-chart.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CsvReaderService, JsonReaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
