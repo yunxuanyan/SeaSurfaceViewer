@@ -1,0 +1,12 @@
+<p>
+  <input
+  style="width:300px" 
+  type="range" 
+  id="time-slider" 
+  min={{this.minValue}} 
+  max={{this.maxValue}} 
+  step ={{this.step}}
+  value="0"
+  (input)="getTimeValue()">
+</p>
+<p>{{value}}</p>

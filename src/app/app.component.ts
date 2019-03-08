@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'sea-surface-viewer';
+  title = 'Sea Surface Dashboard';
+  dateTime = Date.parse('2018-11-08T00:00:00Z');
+ 
+  getSlideDateTime($event){
+    this.dateTime = $event;
+    console.log(this.dateTime);
+  }
+
 }
