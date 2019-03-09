@@ -24,24 +24,24 @@ export class ThermometerChartComponent implements OnInit, OnChanges {
     let scale = this.thermometer.scale();
     scale.minimum(2)
       .maximum(12);
-      this.thermometer.axis().scale(scale)
+    scale.ticks().interval(1);
+    // scale.minorTicks().interval(2);
+    this.thermometer.axis().scale(scale)
     .width('0.5%')
     .offset('-1%')
     .labels()
     .useHtml(true)
     .format('{%Value}&deg;C');
     this.thermometer.thermometer(0)
-    .name('Temperature')
-    .id('0')
     .fill('#64b5f6')
     .stroke('#64b5f6');
     this.chart = anychart.standalones.table();
     this.chart.hAlign('center')
-    .vAlign('middle')
     .useHtml(true)
     .fontSize(16)
     .cellBorder(null);
-    this.chart.contents([[this.title],['Temperature'],[this.thermometer]]);
+    this.chart.contents([[this.title],[this.thermometer]]);
+    this.chart.getRow(0).height(40);
   }
 
   ngAfterViewInit() {
@@ -54,7 +54,7 @@ export class ThermometerChartComponent implements OnInit, OnChanges {
       return;
     }
     this.thermometer.data([this.temperature]);
-    this.tag = `Temperature: ${this.temperature} &deg;C`;
+    this.tag = `Temperature: ${this.temperature} °C`;
   }
 
 }
