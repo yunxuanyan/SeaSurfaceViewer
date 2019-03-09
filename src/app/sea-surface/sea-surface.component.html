@@ -1,20 +1,23 @@
-<div *ngIf="this.surface">
+<div>
     <div style="text-align:center">
         <h2>Sea Surface</h2>
     </div>
-    <div class="charts-of-sea-surface">
-      <app-gauge-chart *ngIf="this.surface.wind_from_direction_at_10m_above_ground_level"  
+    <div  *ngIf="this.surface; else noneOfData" class="charts-of-sea-surface">
+      <app-gauge-chart
         [speed]="this.surface.wind_speed_at_10m_above_ground_level"
         [direction]="this.surface.wind_from_direction_at_10m_above_ground_level"
         [type]="'air'"
         [title]="'Wind Direction and Speed at 10m Above Ground Level'"></app-gauge-chart>
-      <app-height-chart *ngIf="this.surface.sea_surface_wave_significant_height"
+      <app-height-chart
         [height]="this.surface.sea_surface_wave_significant_height"
         [title]="'Wave Significant Height'"
       ></app-height-chart>
-      <app-thermometer-chart *ngIf="this.surface.air_temperature_at_2m_above_ground_level"
+      <app-thermometer-chart
         [temperature]="this.temperature"
-        [title]="'Air Temperature at 2m Above Ground Level'"
+        [title]="'Air Temp Near Ground'"
       ></app-thermometer-chart>
     </div>
+    <ng-template #noneOfData>
+        <div style="padding:50px; text-align: center">N/A</div>
+    </ng-template>
   </div>

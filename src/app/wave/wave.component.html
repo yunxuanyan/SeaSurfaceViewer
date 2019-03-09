@@ -1,16 +1,20 @@
-<div *ngIf="this.wave">
+<div>
     <div style="text-align:center">
         <h2>Wave</h2>
     </div>
-  <div  class="charts-of-wave">
-    <app-gauge-chart *ngIf="this.wave.sea_surface_wave_from_direction_at_variance_spectral_density_maximum"  
+  <div *ngIf="this.wave; else noneOfData" class="charts-of-wave">
+    <app-gauge-chart
       [speed]="this.wave.surface_sea_water_speed"
       [direction]="this.wave.sea_surface_wave_from_direction_at_variance_spectral_density_maximum"
       [type]="'water'"
       [title]="'Wave Direction and Speed'"></app-gauge-chart>
-    <app-height-chart *ngIf="this.wave.sea_surface_wave_maximum_height"
+    <app-height-chart
       [height]="this.wave.sea_surface_wave_maximum_height"
       [title]="'Wave Maximum Height'"
     ></app-height-chart>
   </div>
+  <ng-template #noneOfData>
+      <div style="padding:50px; text-align: center">N/A</div>
+  </ng-template>
 </div>
+

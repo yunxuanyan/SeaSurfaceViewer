@@ -1,4 +1,8 @@
-<div>
+<div *ngIf="this.temperature; else noneOfData">
     <div class="chart-container" #thermometerContainer style="height: 300px;"></div>
     <div style="text-align: center"><p>{{this.tag}}</p></div>
 </div>
+
+<ng-template #noneOfData>
+    <div style="padding:120px">N/A</div>
+</ng-template>

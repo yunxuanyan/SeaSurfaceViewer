@@ -83,7 +83,7 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
         .fill('#1976d2')
         .enabled(true)
         .stroke(null);
-      this.chart.data([120.15]);
+      this.chart.data([this.direction]);
   }
 
   ngAfterViewInit() {
@@ -95,6 +95,7 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
     if(!this.chart){
       return;
     }
+    this.direction = this.direction || 0;
     this.chart.data([this.direction]);
     this.chart.title(this.title);
     this.chart.needle().endRadius(`${this.getGaugeNeedLength()}%`);
@@ -112,11 +113,12 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   getTag() {
-    if(this.direction) {
-      this.tag = `Direction: ${this.direction} degrees`
-    }
-    if(this.speed){
-      this.tag += ` Speed: ${this.speed} m/s`;
+    if(this.direction && this.speed) {
+      this.tag = `Direction: ${this.direction} degrees; Speed: ${this.speed} m/s`;
+    } else if(this.speed){
+      this.tag = `Speed: ${this.speed} m/s`;
+    } else if(this.direction) {
+      this.tag = `Direction: ${this.direction} degrees`;
     }
 
   }
