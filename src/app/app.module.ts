@@ -11,6 +11,7 @@ import { CsvReaderService } from './services/csv-reader.service';
 import { HttpClientModule } from '@angular/common/http';
 import { WaveComponent } from './wave/wave.component';
 import { JsonReaderService } from './services/json-reader.service';
+import { SeaSurfaceComponent } from './sea-surface/sea-surface.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { JsonReaderService } from './services/json-reader.service';
     GaugeChartComponent,
     ThermometerChartComponent,
     HeightChartComponent,
-    WaveComponent
+    WaveComponent,
+    SeaSurfaceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,35 +1,36 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-thermometer-chart',
   templateUrl: './thermometer-chart.component.html',
   styleUrls: ['./thermometer-chart.component.scss']
 })
-export class ThermometerChartComponent implements OnInit {
+export class ThermometerChartComponent implements OnInit, OnChanges {
 
   constructor() { }
 
   @ViewChild('thermometerContainer') container;
 
+  @Input() temperature = 0;
   @Input() title;
 
   chart: anychart.standalones.Table = null;
-  value = 4.5;
+  thermometer;
   tag;
 
   ngOnInit() {
-    let thermometer = anychart.gauges.linear();
-    thermometer.data([this.value]).padding(10, 0, 30, 0);
-    let scale = thermometer.scale();
+    this.thermometer = anychart.gauges.linear();
+    this.thermometer.data([this.temperature]).padding(10, 0, 30, 0);
+    let scale = this.thermometer.scale();
     scale.minimum(2)
       .maximum(12);
-    thermometer.axis().scale(scale)
+      this.thermometer.axis().scale(scale)
     .width('0.5%')
     .offset('-1%')
     .labels()
     .useHtml(true)
     .format('{%Value}&deg;C');
-    thermometer.thermometer(0)
+    this.thermometer.thermometer(0)
     .name('Temperature')
     .id('0')
     .fill('#64b5f6')
@@ -40,12 +41,20 @@ export class ThermometerChartComponent implements OnInit {
     .useHtml(true)
     .fontSize(16)
     .cellBorder(null);
-    this.chart.contents([['Thermometer'],['Temperature'],[thermometer]]);
+    this.chart.contents([[this.title],['Temperature'],[this.thermometer]]);
   }
 
   ngAfterViewInit() {
     this.chart.container(this.container.nativeElement);
     this.chart.draw();
+  }
+
+  ngOnChanges() {
+    if(!this.thermometer){
+      return;
+    }
+    this.thermometer.data([this.temperature]);
+    this.tag = `Temperature: ${this.temperature} &deg;C`;
   }
 
 }

@@ -1,0 +1,16 @@
+<div *ngIf="this.surface" class="charts-of-sea-surface">
+    <p>Sea Surface Data</p>
+    <app-gauge-chart *ngIf="this.surface.wind_from_direction_at_10m_above_ground_level"  
+      [speed]="this.surface.wind_speed_at_10m_above_ground_level"
+      [direction]="this.surface.wind_from_direction_at_10m_above_ground_level"
+      [type]="'air'"
+      [title]="'Wind Direction and Speed at 10m Above Ground Level'"></app-gauge-chart>
+    <app-height-chart *ngIf="this.surface.sea_surface_wave_significant_height"
+      [height]="this.surface.sea_surface_wave_significant_height"
+      [title]="'Wave Significant Height'"
+    ></app-height-chart>
+    <app-thermometer-chart *ngIf="this.surface.air_temperature_at_2m_above_ground_level"
+      [temperature]="this.surface.air_temperature_at_2m_above_ground_level - 273.15"
+      [title]="'Air Temperature at 2m Above Ground Level'"
+    ></app-thermometer-chart>
+  </div>
