@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Quick Start
 
-`git clone https://github.com/yunxuanyan/SeaSurfaceViewer.git` to download the project packages, and run `cd sea-surface-viewer` to get into the project directory, then `npm install` to install dependency, lastly, run `ng serve` and navigate to `http://localhost:4200/`.
+`git clone https://github.com/yunxuanyan/SeaSurfaceViewer.git` to download the project packages, and run `cd SeaSurfaceViewer` to get into the project directory, then `npm install` to install dependency, lastly, run `ng serve` and navigate to `http://localhost:4200/`.
 
 
 ## Development server
