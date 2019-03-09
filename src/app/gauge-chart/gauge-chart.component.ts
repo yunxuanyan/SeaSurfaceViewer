@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit, OnChanges } from '@angular/core';
 
 import 'anychart';
 
@@ -7,15 +7,36 @@ import 'anychart';
   templateUrl: './gauge-chart.component.html',
   styleUrls: ['./gauge-chart.component.scss']
 })
-export class GaugeChartComponent implements OnInit {
+export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor() { }
 
   @ViewChild('gaugeContainer') container;
 
+  @Input() speed = 0;
+  @Input() direction = 0;
+  @Input() type;
+  @Input() title;
+  @Input() tag;
+  range = 0;
+
   chart: anychart.charts.CircularGauge = null;
 
   ngOnInit() {
+    this.initChart();
+    this.range = this.getRange();
+  }
+  
+  getRange() {
+    switch(this.type){
+      case 'water':
+        return 0.1;
+      case 'air':
+        return 15;
+    }
+  }
+
+  initChart() {
     this.chart = anychart.gauges.circular();
     this.chart.fill('#fff') //background
       .stroke(null)
@@ -50,7 +71,7 @@ export class GaugeChartComponent implements OnInit {
       );
       this.chart.needle()
       .startRadius('5%')
-      .endRadius('100%')
+      .endRadius('30%')
       .middleRadius(0)
       .startWidth('5%')
       .middleWidth('5%')
@@ -70,4 +91,32 @@ export class GaugeChartComponent implements OnInit {
     this.chart.draw();
   }
 
+  ngOnChanges() {
+    if(!this.chart){
+      return;
+    }
+    this.chart.data([this.direction]);
+    this.chart.needle().endRadius(`${this.getGaugeNeedLength()}%`);
+    this.getTag();
+  }
+
+  //TODO: auto calculate the length given maxSpeed and minSpeed
+  getGaugeNeedLength() {
+    if(this.speed){
+      return 30+this.speed*70/this.range;
+    } else {
+      return 30;
+    }
+      
+  }
+
+  getTag() {
+    if(this.direction) {
+      this.tag = `Direction: ${this.direction} degrees`
+    }
+    if(this.speed){
+      this.tag += ` Speed: ${this.speed} m/s`;
+    }
+
+  }
 }

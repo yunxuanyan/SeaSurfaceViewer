@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 
 @Component({
   selector: 'app-thermometer-chart',
@@ -11,8 +11,11 @@ export class ThermometerChartComponent implements OnInit {
 
   @ViewChild('thermometerContainer') container;
 
+  @Input() title;
+
   chart: anychart.standalones.Table = null;
   value = 4.5;
+  tag;
 
   ngOnInit() {
     let thermometer = anychart.gauges.linear();
