@@ -96,6 +96,7 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
     this.chart.data([this.direction]);
+    this.chart.title(this.title);
     this.chart.needle().endRadius(`${this.getGaugeNeedLength()}%`);
     this.getTag();
   }

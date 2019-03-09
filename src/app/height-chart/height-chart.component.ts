@@ -19,7 +19,7 @@ export class HeightChartComponent implements OnInit,OnChanges {
 
   ngOnInit() {
     this.chart = anychart.area();
-    this.chart.title('Wave Height');
+    this.chart.title(this.title);
     let data = anychart.data.set([
       {x:"0",value:0},
       {x:"1",value:4.56},
