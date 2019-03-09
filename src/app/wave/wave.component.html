@@ -1,0 +1,12 @@
+<div *ngIf="this.wave" class="charts-of-wave">
+  <p>Wave Data</p>
+  <app-gauge-chart *ngIf="this.wave.sea_surface_wave_from_direction_at_variance_spectral_density_maximum"  
+    [speed]="this.wave.surface_sea_water_speed"
+    [direction]="this.wave.sea_surface_wave_from_direction_at_variance_spectral_density_maximum"
+    [type]="'water'"
+    [title]="'Wave Direction and Speed'"></app-gauge-chart>
+  <app-height-chart *ngIf="this.wave.sea_surface_wave_maximum_height"
+    [height]="this.wave.sea_surface_wave_maximum_height"
+    [title]="'Wave Maximum Height'"
+  ></app-height-chart>
+</div>

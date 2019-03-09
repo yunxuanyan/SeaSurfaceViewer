@@ -9,6 +9,7 @@ import { ThermometerChartComponent } from './thermometer-chart/thermometer-chart
 import { HeightChartComponent } from './height-chart/height-chart.component';
 import { CsvReaderService } from './services/csv-reader.service';
 import { HttpClientModule } from '@angular/common/http';
+import { WaveComponent } from './wave/wave.component';
 import { JsonReaderService } from './services/json-reader.service';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { JsonReaderService } from './services/json-reader.service';
     TimeSliderComponent,
     GaugeChartComponent,
     ThermometerChartComponent,
-    HeightChartComponent
+    HeightChartComponent,
+    WaveComponent
   ],
   imports: [
     BrowserModule,
