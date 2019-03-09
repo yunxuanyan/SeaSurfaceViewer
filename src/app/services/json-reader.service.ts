@@ -11,10 +11,11 @@ export class JsonReaderService {
   constructor(private http:HttpClient) { }
 
   readJsonFile() {
-    this.http.get('./../assets/data.json', {responseType: 'text'})
-    .subscribe(
+    return this.http.get('./../assets/data.json', {responseType: 'text'}).toPromise()
+    .then(
       data=>{
         this.waveDataObjs = JSON.parse(data);
+        return Promise.resolve();
       },
       error=>{
         console.log(error);

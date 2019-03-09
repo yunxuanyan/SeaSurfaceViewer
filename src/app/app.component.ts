@@ -10,7 +10,7 @@ import { JsonReaderService } from './services/json-reader.service';
 })
 export class AppComponent implements OnInit{
   title = 'Sea Surface Dashboard';
-  dateTime = '2018-11-08T00:00:00Z';
+  dateTime = '2018-11-07T00:00:00Z';
   surface = null;
   wave = null;
 
@@ -20,8 +20,10 @@ export class AppComponent implements OnInit{
     ){}
 
   ngOnInit() {
-    this.surfaceDataService.readCsvFile();
-    this.waveDataService.readJsonFile();
+    this.surfaceDataService.readCsvFile()
+    .then(()=>this.surface = this.surfaceDataService.getSurfaceObj(this.dateTime));
+    this.waveDataService.readJsonFile()
+    .then(()=>this.wave = this.waveDataService.getWaveObj(this.dateTime));
   }
 
   //TODO: get initial date after file read

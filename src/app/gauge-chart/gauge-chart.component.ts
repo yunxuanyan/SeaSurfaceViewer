@@ -13,8 +13,8 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('gaugeContainer') container;
 
-  @Input() speed = 0;
-  @Input() direction = 0;
+  @Input() speed;
+  @Input() direction;
   @Input() type;
   @Input() title;
   @Input() tag;
@@ -23,6 +23,7 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
   chart: anychart.charts.CircularGauge = null;
 
   ngOnInit() {
+    this.direction = this.direction || 0;
     this.initChart();
     this.range = this.getRange();
   }
@@ -100,6 +101,7 @@ export class GaugeChartComponent implements OnInit, AfterViewInit, OnChanges {
     this.chart.title(this.title);
     this.chart.needle().endRadius(`${this.getGaugeNeedLength()}%`);
     this.getTag();
+    this.chart.autoRedraw();
   }
 
   //TODO: auto calculate the length given maxSpeed and minSpeed

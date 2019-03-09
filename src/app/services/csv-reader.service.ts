@@ -11,8 +11,8 @@ export class CsvReaderService {
   constructor(private http:HttpClient) { }
 
   readCsvFile(){
-    this.http.get('./../assets/data.csv', {responseType: 'text'})
-    .subscribe(
+    return this.http.get('./../assets/data.csv', {responseType: 'text'})
+    .toPromise().then(
       data =>{
         let lines = data.split('\n');
         let headers = lines[0].split(',');
@@ -24,6 +24,7 @@ export class CsvReaderService {
             }
             this.surfaceDataObjs[values[0]]=valueObj;
         }
+        return Promise.resolve();
       },
       error =>{
         console.log(error);
